@@ -8,6 +8,9 @@ class Matriks{
     public int IdxKolMin = 1;
 
     Matriks(int BrsEff, int KolEff){
+        MakeEmpty(BrsEff, KolEff);
+    }
+    void MakeEmpty(int BrsEff, int KolEff){
         this.NBrsEff = BrsEff;
         this.NKolEff = KolEff;
         for (int i = this.IdxBrsMin; i <= this.NBrsEff; i++){
