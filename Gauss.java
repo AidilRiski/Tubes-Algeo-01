@@ -37,4 +37,28 @@ class Gauss{
         }
         return true;
     }
+    boolean isInfiniteSolution(){
+        if (this.isSolvable()){
+            int i = this.matriks.IdxBrsMin;
+            while (i <= this.matriks.NBrsEff && i <= this.matriks.NKolEff - 1){
+                int j = this.matriks.IdxKolMin;
+                boolean exitJ = false;
+                while (j <= this.matriks.NKolEff && !exitJ){
+                    if (this.matriks.Mem[i][j] != 0){
+                        exitJ = true;
+                    }else {
+                        if (j < this.matriks.NKolEff){
+                            j++;
+                        }else {
+                            return true;
+                        }
+                    }
+                }
+                i++;
+            }
+            return false;
+        }else {
+            return false;
+        }
+    }
 }
