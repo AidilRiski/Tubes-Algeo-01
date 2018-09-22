@@ -1,38 +1,30 @@
-import java.util.*;
-
 class Gauss{
-    public static void main(String[] args){
-        Matriks M1 = new Matriks(3, 3);
-        M1.BacaMatriks();
-        CreateEchelon(M1);
-        M1.TulisMatriks();
-        if (isSolvable(M1)){
-            System.out.println("Solvable");
-        }else {
-            System.out.println("Not Solvable");
-        }
+    public Matriks matriks;
+
+    Gauss(Matriks m){
+        this.matriks = m;
     }
-    static void CreateEchelon(Matriks M){
-        for (int i = M.IdxBrsMin; i < M.NBrsEff; i++){
-            for (int j = i + 1; j <= M.NBrsEff; j++){
-                if (M.Mem[j][i] != 0){
-                    Double multiplier = M.Mem[j][i];
-                    Double divider = M.Mem[i][i];
-                    for (int k = i;  k <= M.NKolEff; k++){
-                        M.Mem[j][k] -= multiplier * M.Mem[i][k] / divider;
+    void CreateEchelon(){
+        for (int i = this.matriks.IdxBrsMin; i < this.matriks.NBrsEff; i++){
+            for (int j = i + 1; j <= this.matriks.NBrsEff; j++){
+                if (this.matriks.Mem[j][i] != 0){
+                    Double multiplier = this.matriks.Mem[j][i];
+                    Double divider = this.matriks.Mem[i][i];
+                    for (int k = i;  k <= this.matriks.NKolEff; k++){
+                        this.matriks.Mem[j][k] -= multiplier * this.matriks.Mem[i][k] / divider;
                     }
                 }
             }
         }
     }
-    static boolean isSolvable(Matriks M){
-        int i = M.IdxBrsMin;
-        while (i <= M.NBrsEff){
-            int j = M.IdxKolMin;
+    boolean isSolvable(){
+        int i = this.matriks.IdxBrsMin;
+        while (i <= this.matriks.NBrsEff){
+            int j = this.matriks.IdxKolMin;
             boolean exitJ = false;
-            while (j <= M.NKolEff && !exitJ){
-                if (M.Mem[i][j] != 0){
-                    if (j == M.NKolEff){
+            while (j <= this.matriks.NKolEff && !exitJ){
+                if (this.matriks.Mem[i][j] != 0){
+                    if (j == this.matriks.NKolEff){
                         return false;
                     }else {
                         exitJ = true;
