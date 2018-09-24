@@ -19,10 +19,10 @@ class Matriks{
             }
         }
     }
-    void BacaMatriks(){
+    void BacaMatriks(int brsMax, int kolMax){
         Scanner input = new Scanner(System.in);
-        for (int i = this.IdxBrsMin; i <= this.NBrsEff; i++){
-            for (int j = this.IdxKolMin; j <= this.NKolEff; j++){
+        for (int i = this.IdxBrsMin; i <= brsMax; i++){
+            for (int j = this.IdxKolMin; j <= kolMax; j++){
                 this.Mem[i][j] = input.nextDouble();
             }
         }
@@ -37,6 +37,35 @@ class Matriks{
                     System.out.println();
                 }
             }
+        }
+    }
+    boolean isAllZeroBrs(int idxBrs){
+        int j = this.IdxKolMin;
+        while (j <= this.NKolEff){
+            if (this.Mem[idxBrs][j] != 0){
+                return false;
+            }
+            j++;
+        }
+        return true;
+    }
+    boolean isAllZeroKol(int idxKol){
+        int i = this.IdxBrsMin;
+        while (i <= this.NBrsEff){
+            if (this.Mem{i][idxKol] != 0){
+                return false;
+            }
+            i++;
+        }
+        return true;
+    }
+    void TukarBrs(int idxBrs1, int idxBrs2){
+        int temp;
+        int j;
+        for(j=1; j<=this.NKolEff;j++){
+            temp = this.Mem[idxBrs1][j];
+            this.Mem[idxBrs1][j] = this.Mem[idxBrs2][j];
+            this.Mem[idxBrs2][j] = temp;
         }
     }
 }

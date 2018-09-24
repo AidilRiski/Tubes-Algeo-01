@@ -1,3 +1,5 @@
+import java.util.*;
+
 class Gauss{
     public Matriks matriks;
 
@@ -13,6 +15,38 @@ class Gauss{
                     for (int k = i;  k <= this.matriks.NKolEff; k++){
                         this.matriks.Mem[j][k] -= multiplier * this.matriks.Mem[i][k] / divider;
                     }
+                }
+            }
+        }
+    }
+    void CreateReducedEchelon(){
+        this.CreateEchelon();
+        int initialKol;
+        for (int j = this.matriks.IdxKolMin; j < this.matriks.NKolEff; j++){
+            if (this.matriks.isAllZeroKol(j)){
+                continue;
+            }else {
+                initialKol = j;
+            }
+        }
+        if ((this.matriks.NKolEff - initialKol) + 1 >= this.matriks.NBrsEff){
+            for (int i = this.matriks.IdxBrsMin; i < this.matriks.NBrsEff; i++){
+                for (int j = i + 1; j <= this.matriks.NBrsEff; j++){
+                    if (this.matriks.Mem[i][j] != 0){
+                        Double multiplier
+                    }
+                }
+            }
+        }
+    }
+    void CleanMatriks(){
+        for (int i = this.matriks.IdxBrsMin; i < this.matriks.NBrsEff; i++){
+            System.out.println("Check Cleaning");
+            if (this.matriks.isAllZeroBrs(i)){
+                System.out.println("Cleaning");
+                for (int k = this.matriks.IdxKolMin; k <= this.matriks.NKolEff; k++){
+                    this.matriks.Mem[i][k] = this.matriks.Mem[i + 1][k];
+                    this.matriks.Mem[i + 1][k] = 0.0;
                 }
             }
         }
