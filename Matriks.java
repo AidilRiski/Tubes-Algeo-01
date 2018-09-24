@@ -52,7 +52,7 @@ class Matriks{
     boolean isAllZeroKol(int idxKol){
         int i = this.IdxBrsMin;
         while (i <= this.NBrsEff){
-            if (this.Mem{i][idxKol] != 0){
+            if (this.Mem[i][idxKol] != 0){
                 return false;
             }
             i++;
@@ -60,7 +60,7 @@ class Matriks{
         return true;
     }
     void TukarBrs(int idxBrs1, int idxBrs2){
-        int temp;
+        Double temp;
         int j;
         for(j=1; j<=this.NKolEff;j++){
             temp = this.Mem[idxBrs1][j];

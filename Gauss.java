@@ -21,20 +21,34 @@ class Gauss{
     }
     void CreateReducedEchelon(){
         this.CreateEchelon();
-        int initialKol;
+        int initialKol = 1;
         for (int j = this.matriks.IdxKolMin; j < this.matriks.NKolEff; j++){
+            System.out.println(this.matriks.isAllZeroKol(j));
             if (this.matriks.isAllZeroKol(j)){
+                initialKol = j;
                 continue;
             }else {
-                initialKol = j;
+                break;
             }
         }
+        System.out.println(initialKol);
         if ((this.matriks.NKolEff - initialKol) + 1 >= this.matriks.NBrsEff){
-            for (int i = this.matriks.IdxBrsMin; i < this.matriks.NBrsEff; i++){
-                for (int j = i + 1; j <= this.matriks.NBrsEff; j++){
-                    if (this.matriks.Mem[i][j] != 0){
-                        Double multiplier
+            for (int i = this.matriks.NBrsEff - 1; i >= this.matriks.IdxBrsMin; i--){
+                for (int k = this.matriks.NBrsEff; k > i; k--){
+
+                    
+                    System.out.println(k + " " + k);
+                    System.out.println(i + " " + k);
+                    if (this.matriks.Mem[i][k] != 0){
+                        Double multiplier = this.matriks.Mem[i][k];
+                        Double divider = this.matriks.Mem[k][k];
+                        for (int j = this.matriks.IdxKolMin; j <= this.matriks.NKolEff; j++){
+                            this.matriks.Mem[i][j] -= multiplier * this.matriks.Mem[k][j] / divider;
+                        }
                     }
+                    this.matriks.TulisMatriks();
+                    System.out.println("");
+                    
                 }
             }
         }
