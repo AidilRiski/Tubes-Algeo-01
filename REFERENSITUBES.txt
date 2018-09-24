@@ -1,0 +1,3 @@
+Referensi baca file eksternal:
+https://stackoverflow.com/questions/1855753/reading-double-values-from-a-file
+https://stackoverflow.com/questions/27177395/error-cannot-find-symbol-class-filenotfoundexception
