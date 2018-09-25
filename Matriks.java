@@ -68,4 +68,21 @@ class Matriks{
             this.Mem[idxBrs2][j] = temp;
         }
     }
+    void IdentifyBrs(int idxBrs){
+        
+        boolean found = false;
+        Double divider = 0.0;
+        int j = this.IdxKolMin;
+        while (j <= this.NKolEff){
+            if (!found && this.Mem[idxBrs][j] != 0){
+                divider = this.Mem[idxBrs][j];
+                found = true;
+                j--;
+            }else if (found){
+                this.Mem[idxBrs][j] = this.Mem[idxBrs][j] / divider;
+            }
+            j++;
+        }
+        
+    }
 }
