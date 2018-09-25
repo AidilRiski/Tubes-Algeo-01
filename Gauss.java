@@ -67,7 +67,6 @@ class Gauss{
                     for (int n = this.matriks.IdxKolMin; n <= this.matriks.NKolEff; n++){
                         this.matriks.Mem[i][n] -= multiplier * this.matriks.Mem[i + c][n] / divider;
                     }
-                    this.matriks.TulisMatriks();
                 }
                 i++;
             }
