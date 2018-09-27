@@ -83,10 +83,10 @@ class FileEksternal{
           temp = scan.nextDouble();
           for (j = M.IdxKolMin ; j <= M.NKolEff ; j++) {
             if (j != M.NKolEff) {
-              DecimalFormat df = new DecimalFormat("#.##########");
-              df.setRoundingMode(RoundingMode.CEILING);
+              /*DecimalFormat df = new DecimalFormat("0.0000000000");
+              df.setRoundingMode(RoundingMode.CEILING); */
               bulat = (Math.pow(temp,j-1));
-              M.Mem[i][j] = df.format (bulat);  
+              M.Mem[i][j] = /* df.format */ (bulat);
             }
             else
               M.Mem[i][j] = scan.nextDouble();
