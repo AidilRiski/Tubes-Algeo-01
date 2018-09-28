@@ -5,6 +5,7 @@ import java.io.BufferedReader;
 import java.io.*;
 import java.text.DecimalFormat;
 import java.math.RoundingMode;
+import java.lang.*;
 
 class FileEksternal{
  public File file;
@@ -83,10 +84,8 @@ class FileEksternal{
           temp = scan.nextDouble();
           for (j = M.IdxKolMin ; j <= M.NKolEff ; j++) {
             if (j != M.NKolEff) {
-              /*DecimalFormat df = new DecimalFormat("0.0000000000");
-              df.setRoundingMode(RoundingMode.CEILING); */
               bulat = (Math.pow(temp,j-1));
-              M.Mem[i][j] = /* df.format */ (bulat);
+              M.Mem[i][j] = bulat;
             }
             else
               M.Mem[i][j] = scan.nextDouble();

@@ -5,6 +5,7 @@ import java.io.BufferedReader;
 import java.io.*;
 import java.text.DecimalFormat;
 import java.math.RoundingMode;
+import java.lang.*;
 
 class TugasBesarAlgeo{
 

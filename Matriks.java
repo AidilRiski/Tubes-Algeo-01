@@ -1,4 +1,11 @@
-import java.util.*;
+import java.util.Scanner;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.BufferedReader;
+import java.io.*;
+import java.text.DecimalFormat;
+import java.math.RoundingMode;
+import java.lang.*;
 
 class Matriks{
     public Double[][] Mem = new Double[100][100];
@@ -50,7 +57,12 @@ class Matriks{
     void TulisMatriks(){
         for (int i = this.IdxBrsMin; i <= this.NBrsEff; i++){
             for (int j = this.IdxKolMin; j <= this.NKolEff; j++){
-                System.out.print(this.Mem[i][j]);
+                DecimalFormat df = new DecimalFormat("#.#####");
+                df.setRoundingMode(RoundingMode.CEILING);
+
+                //M.Mem[i][j] = Double.parseDouble(df.format(bulat));
+
+                System.out.print(df.format(this.Mem[i][j]));
                 if (j < this.NKolEff){
                     System.out.print(" ");
                 }else if (j == this.NKolEff){
