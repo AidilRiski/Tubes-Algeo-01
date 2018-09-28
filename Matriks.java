@@ -20,13 +20,33 @@ class Matriks{
         }
     }
     void BacaMatriks(int brsMax, int kolMax){
+        this.NBrsEff = brsMax;
+        this.NKolEff = kolMax;
         Scanner input = new Scanner(System.in);
-        for (int i = this.IdxBrsMin; i <= brsMax; i++){
-            for (int j = this.IdxKolMin; j <= kolMax; j++){
+        for (int i = this.IdxBrsMin; i <= this.NBrsEff; i++){
+            for (int j = this.IdxKolMin; j <= this.NKolEff ; j++){
                 this.Mem[i][j] = input.nextDouble();
             }
         }
     }
+
+    void BuatMatriksInterpolasi (int brsMax) {
+      this.NBrsEff = brsMax;
+      this.NKolEff = brsMax + 1;
+      for (int i = this.IdxBrsMin ; i <= this.NBrsEff ; i++  ) {
+        double temp, hsl;
+        temp =  this.Mem[i][1];
+        hsl = this.Mem[i][2];
+        for (int j = this.IdxKolMin ; j <= this.NKolEff ; j++) {
+          if (j != this.NKolEff) {
+            this.Mem[i][j] = (Math.pow(temp,j-1));
+          } else {
+            this.Mem[i][j] = hsl;
+          }
+        }
+      }
+    }
+
     void TulisMatriks(){
         for (int i = this.IdxBrsMin; i <= this.NBrsEff; i++){
             for (int j = this.IdxKolMin; j <= this.NKolEff; j++){
@@ -69,7 +89,7 @@ class Matriks{
         }
     }
     void IdentifyBrs(int idxBrs){
-        
+
         boolean found = false;
         Double divider = 0.0;
         int j = this.IdxKolMin;
@@ -83,6 +103,6 @@ class Matriks{
             }
             j++;
         }
-        
+
     }
 }

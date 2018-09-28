@@ -191,13 +191,15 @@ class TugasBesarAlgeo{
           }
 
           if (menumunculketiga == 1) {
-            System.out.print ("Masukkan jumlah baris efektif: ");
+            System.out.print ("Masukkan jumlah baris (n): ");
             Brs = masuk.nextInt();
-            System.out.print ("Masukkan jumlah kolom efektif: ");
-            Kol = masuk.nextInt();
+            Kol = 2;
             M1.MakeEmpty(Brs,Kol);
-            System.out.println ("Masukkan elemen matriks:");
+            System.out.println ("Masukkan elemen x dan y dengan dipisahkan spasi:");
             M1.BacaMatriks(Brs,Kol);
+            M1.BuatMatriksInterpolasi(Brs);
+            System.out.println ("Matriks konversi dari inputan user adalah:");
+            M1.TulisMatriks();
             Gauss G1 = new Gauss(M1);
             G1.CreateEchelon();
             System.out.println ("Matriks eselon: ");
@@ -223,10 +225,22 @@ class TugasBesarAlgeo{
           break;
         }
       } else if (menumunculkedua == 2) {
+        /*System.out.print ("Masukkan jumlah baris (n): ");
+        Brs = masuk.nextInt();
+        Kol = 2;
+        M1.MakeEmpty(Brs,Kol);
+        System.out.println ("Masukkan elemen x dan y dengan dipisahkan spasi:");
+        M1.BacaMatriks(Brs,Kol);
+        M1.BuatMatriksInterpolasi(Brs);
+        System.out.println ("Matriks konversi dari inputan user adalah:")
+        M1.TulisMatriks(); */
+
+        /*Gauss G1 = new Gauss(M1);
+        G1.CreateReducedEchelon();
+        System.out.println ("Matriks eselon tereduksi : ");
+        G1.matriks.TulisMatriks(); */
 
       }
-
-
     } else if (menumunculpertama == 3) {
       break;
     }
