@@ -1,32 +1,63 @@
 import java.util.Scanner;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.BufferedReader;
+import java.io.*;
+import java.text.DecimalFormat;
+import java.math.RoundingMode;
+import java.lang.*;
 
 public class Solution{
     public Matriks matriks;
+    public Double [] Sol = new Double [100];
+    public int BrsEff;
 
-    Solution(Matriks m){
-        this.matriks = m;
+    Solution (int ArrBrsEff){
+        MakeArray (ArrBrsEff);
     }
 
-    public backSubtitution(){
-        int N = this.matriks.NBrsEff;
-        double[] solution = new double[N];
-
-        for (int i = N - 1; i >= 0; i--) //Indeks Array Dimulai dari 0; .-.
-        {
-            double sum = 0.0;
-            for (int j = i + 1; j < N; j++) 
-                sum += this.matriks.Mem[i][j] * solution[j];
-            solution[i] = (this.matriks.Mem[i][this.matriks.NKolEff] - sum) / this.matriks.Mem[i][i];
-        } 
+    void MakeArray (int ArrBrsEff) {
+      this.BrsEff = ArrBrsEff;
+      for (int i = 0 ; i <= ArrBrsEff ; i++) {
+        this.Sol[i] = 0.0;
+      }
     }
+
 
     /** print solusi **/
-    public void printSolution(double[] sol)
+
+    public void printSolution()
     {
-        int N = sol.length;
-        System.out.println("\nSolusi : ");
-        for (int i = 0; i < N; i++) 
-            System.out.printf("%.2f", sol[i]);   
-        System.out.println();     
+        //int N = sol.length;
+        System.out.println("Solusi : ");
+        for (int i = 1; i <= this.BrsEff ; i++) {
+          DecimalFormat df = new DecimalFormat("#.######");
+          //df.setRoundingMode(RoundingMode.CEILING);
+
+          //M.Mem[i][j] = Double.parseDouble(df.format(bulat));
+          System.out.print("X" + i + " = " + df.format(this.Sol[i]) + "\n");
+        //  System.out.println();
+        }
+
+        System.out.println();
+    }
+
+    public void PrintSolToFile () throws Exception {
+      try {
+        FileOutputStream fout = new FileOutputStream("SolusiSPL.txt");
+
+        for (int i = 1 ; i <= this.BrsEff ; i++) {
+          DecimalFormat df = new DecimalFormat("#.######");
+          String s = "x" + Integer.toString(i) + " = " + df.format(this.Sol[i]);
+          byte b[] = s.getBytes();
+          fout.write(b);
+          fout.write(System.getProperty("line.separator").getBytes());
+        }
+        fout.flush();
+        fout.close();
+      } catch(Exception e) {
+        System.out.println(e);
+      }
+
     }
 }

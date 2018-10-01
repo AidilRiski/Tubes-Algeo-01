@@ -40,7 +40,7 @@ class TugasBesarAlgeo{
       G1.matriks.TulisMatriks();
     } */
 
-    public static void main(String[] args)throws FileNotFoundException, IOException {
+    public static void main(String[] args)throws Exception {
       String namafile = new String();
       int menumunculpertama, menumunculkedua, menumunculketiga;
       int Brs, Kol;
@@ -106,6 +106,10 @@ class TugasBesarAlgeo{
                 G1.CreateEchelon();
                 System.out.println ("Matriks eselon: ");
                 G1.matriks.TulisMatriks();
+                Solution S1 = new Solution(G1.matriks.NBrsEff);
+                G1.backSubtitution(G1.matriks,S1);
+                S1.printSolution();
+                S1.PrintSolToFile();
 
               } else if (menumunculketiga == 2) {
                 System.out.println ("Masukkan nama FileEksternal dengan format .txt (tulis .txt juga)");

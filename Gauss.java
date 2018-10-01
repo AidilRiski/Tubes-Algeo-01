@@ -6,6 +6,7 @@ class Gauss{
     Gauss(Matriks m){
         this.matriks = m;
     }
+
     void CreateEchelon(){
         for (int i = this.matriks.IdxBrsMin; i < this.matriks.NBrsEff; i++){
             for (int j = i + 1; j <= this.matriks.NBrsEff; j++){
@@ -76,7 +77,7 @@ class Gauss{
             for (int i = this.matriks.NBrsEff - 1; i >= this.matriks.IdxBrsMin; i--){
                 for (int k = this.matriks.NBrsEff; k > i; k--){
 
-                    
+
                     System.out.println(k + " " + k);
                     System.out.println(i + " " + k);
                     if (this.matriks.Mem[i][k] != 0 && this.matriks.Mem[k][k] != 0){
@@ -88,7 +89,7 @@ class Gauss{
                     }
                     this.matriks.TulisMatriks();
                     System.out.println("");
-                    
+
                 }
             }
         }*/
@@ -150,4 +151,36 @@ class Gauss{
             return false;
         }
     }
+
+    public void backSubtitution (Matriks M1, Solution S1){
+        //int N = this.matriks.NBrsEff;
+        //double[] solution = new double[M1.NBrsEff];
+
+        //MakeArray(M1.NBrsEff);
+        //System.out.println (S1.Sol[0]);
+        System.out.println (M1.Mem[M1.NBrsEff][M1.NKolEff]);
+        for (int i = M1.NBrsEff; i > 0; i--) //Indeks Array Dimulai dari 0; .-.
+        {
+            double sum = 0.0;
+            for (int j = i+1; j <= M1.NBrsEff; j++) {
+              System.out.print ("Iterasi ke-");
+              System.out.println(j);
+              System.out.println (M1.Mem[i][j]);
+              //this.Sol[j] = 0.0;
+              sum = sum + (M1.Mem[i][j]* S1.Sol[j]);
+            }
+            S1.Sol[i] = (M1.Mem[i][M1.NKolEff] - sum) / M1.Mem[i][i];
+            //System.out.println (sum);
+        }
+    }
+
+    /*public void printSolution()
+    {
+        //int N = sol.length;
+        System.out.println("Solusi : ");
+        for (int i = 0; i < this.BrsEff ; i++)
+            System.out.print(/*"%.2f",this.Sol[i]);
+    /*    System.out.println();
+  } */
+
 }
