@@ -184,6 +184,7 @@ class Gauss{
         int i = 1;
         int j = 1;
 
+        //Assign Freevar
         while (j < M1.NKolEff){
             if (M1.Mem[i][j] == 1){
                 idxAda[i] = j;
@@ -194,6 +195,8 @@ class Gauss{
             }
             j++;
         }
+
+        //Assign Solution
         for (int k = 1; k <= M1.NBrsEff; k++ ){
             for (int l = M1.NKolEff - 1; l < idxAda[k]; l--){
                 sumParam += " -" + Double.toString(M1.Mem[k][l]);
