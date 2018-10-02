@@ -159,7 +159,7 @@ class Gauss{
         //MakeArray(M1.NBrsEff);
         //System.out.println (S1.Sol[0]);
         System.out.println (M1.Mem[M1.NBrsEff][M1.NKolEff]);
-        for (int i = M1.NBrsEff; i > 0; i--) //Indeks Array Dimulai dari 0; .-.
+        for (int i = M1.NBrsEff; i > 0; i--)
         {
             double sum = 0.0;
             for (int j = i+1; j <= M1.NBrsEff; j++) {
@@ -175,26 +175,31 @@ class Gauss{
     }
 
     public void paramSol (Matriks M1, Solution S1){
-        int varBebas = M1.NKolEff - M1.NBrsEff + 1;
-        char[] varIsi = new char[M1.NKolEff - 1];
+        int varBebas = M1.NKolEff - (M1.NBrsEff + 1);
+        char[] varIsi = new char[varBebas];
+        int[] idxAda = new int[M1.NBrsEff];
+        String[] solParam = new String[M1.NKolEff];
         char isi = 'a';
-        int[] idxBebas = new int[varBebas+1];
-        int k = 1;
-        //cari indeks yang mengandung varBebas
-        for (int i = 1; i < M1.NKolEff; i++){
-            int det = 1;
-            for (int j = 1; j <= M1.NBrsEff; i++){
-                if ((M1.Mem[i][j]) == 0)
-                    det = 0;
-                det *= M1.Mem[i][j];
+        String sumParam = "";
+        int i = 1;
+        int j = 1;
+
+        while (j < M1.NKolEff){
+            if (M1.Mem[i][j] == 1){
+                idxAda[i] = j;
+                i++;
+            } else {
+                solParam[j] = Character.toString(isi);
+                isi = (char)((int)isi + 1);
             }
-                if (det != 0){
-                    idxBebas[k++] = i;
-                    varIsi[i] = isi;
-                    isi = (char)(isi + 1);
-                }
+            j++;
         }
-        
+        for (int k = 1; k <= M1.NBrsEff; k++ ){
+            for (int l = M1.NKolEff - 1; l < idxAda[k]; l--){
+                sumParam += " -" + Double.toString(M1.Mem[k][l]);
+            }
+            solParam[idxAda[k]] = Double.toString(M1.Mem[k][M1.NKolEff]) + sumParam;
+        }
     }
 
     /*public void printSolution()
