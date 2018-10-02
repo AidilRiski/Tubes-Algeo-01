@@ -174,6 +174,29 @@ class Gauss{
         }
     }
 
+    public void paramSol (Matriks M1, Solution S1){
+        int varBebas = M1.NKolEff - M1.NBrsEff + 1;
+        char[] varIsi = new char[M1.NKolEff - 1];
+        char isi = 'a';
+        int[] idxBebas = new int[varBebas+1];
+        int k = 1;
+        //cari indeks yang mengandung varBebas
+        for (int i = 1; i < M1.NKolEff; i++){
+            int det = 1;
+            for (int j = 1; j <= M1.NBrsEff; i++){
+                if ((M1.Mem[i][j]) == 0)
+                    det = 0;
+                det *= M1.Mem[i][j];
+            }
+                if (det != 0){
+                    idxBebas[k++] = i;
+                    varIsi[i] = isi;
+                    isi = (char)(isi + 1);
+                }
+        }
+        
+    }
+
     /*public void printSolution()
     {
         //int N = sol.length;
