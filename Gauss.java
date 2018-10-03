@@ -1,4 +1,8 @@
 import java.util.*;
+import java.text.DecimalFormat;
+import java.math.RoundingMode;
+import java.lang.*;
+//import com.sun.javafx.scene.web.Printable;
 
 class Gauss{
     public Matriks matriks;
@@ -166,15 +170,15 @@ class Gauss{
               System.out.print ("Iterasi ke-");
               System.out.println(j);
               System.out.println (M1.Mem[i][j]);
-              //this.Sol[j] = 0.0;
-              sum = sum + (M1.Mem[i][j]* S1.Sol[j]);
+              sum = sum + (M1.Mem[i][j]* Double.parseDouble(S1.Sol[j]));
             }
-            S1.Sol[i] = (M1.Mem[i][M1.NKolEff] - sum) / M1.Mem[i][i];
-            //System.out.println (sum);
+            double temp = (M1.Mem[i][M1.NKolEff] - sum) / M1.Mem[i][i];
+            DecimalFormat df = new DecimalFormat("#.######");
+            S1.Sol[i] = df.format(temp);
         }
     }
 
-    public void paramSol (Matriks M1, SolParam SP){
+    public void paramSol (Matriks M1, Solution S1){
         int varBebas = M1.NKolEff - (M1.NBrsEff + 1);
         char[] varIsi = new char[varBebas];
         int[] idxAda = new int[M1.NBrsEff+1];
@@ -193,7 +197,7 @@ class Gauss{
                 idxAda[i] = j;
                 i++;
             } else {
-                SP.SolPar[j] = Character.toString(isi);
+                S1.Sol[j] = Character.toString(isi);
                 isi = (char)((int)isi + 1);
             }
             j++;
@@ -205,20 +209,19 @@ class Gauss{
             String sumParam = "";
             for (int l = M1.NKolEff - 1; l > idxAda[k]; l--){
                 if( Math.abs(M1.Mem[k][l]) > e){
-                    sumParam += " -" + Double.toString(M1.Mem[k][l]) + SP.SolPar[l];
+                    sumParam += " -" + Double.toString(M1.Mem[k][l]) + S1.Sol[l];
                 }
             }
-            SP.SolPar[idxAda[k]] = Double.toString(M1.Mem[k][M1.NKolEff]) + sumParam;
+            S1.Sol[idxAda[k]] = Double.toString(M1.Mem[k][M1.NKolEff]) + sumParam;
         }
     }
 
-    /*public void printSolution()
-    {
-        //int N = sol.length;
-        System.out.println("Solusi : ");
-        for (int i = 0; i < this.BrsEff ; i++)
-            System.out.print(/*"%.2f",this.Sol[i]);
-    /*    System.out.println();
-  } */
+    public void solusi (Matriks M1, Solution S1){
+        if(M1.NKolEff != M1.NBrsEff + 1){
+            paramSol(M1,S1);
+        } else {
+            backSubtitution(M1, S1);
+        }
+    }
 
 }
