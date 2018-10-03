@@ -174,23 +174,26 @@ class Gauss{
         }
     }
 
-    public void paramSol (Matriks M1, Solution S1){
+    public void paramSol (Matriks M1, SolParam SP){
         int varBebas = M1.NKolEff - (M1.NBrsEff + 1);
         char[] varIsi = new char[varBebas];
-        int[] idxAda = new int[M1.NBrsEff];
-        String[] solParam = new String[M1.NKolEff];
+        int[] idxAda = new int[M1.NBrsEff+1];
+        //String[] solParam = new String[M1.NKolEff];
         char isi = 'a';
-        String sumParam = "";
+        // /String sumParam;
         int i = 1;
         int j = 1;
-
+        Double e = 0.0001;
+        
+        //Ubah Ke Gauss-Jordan
+        //M1.CreateReducedEchelon();
         //Assign Freevar
         while (j < M1.NKolEff){
             if (M1.Mem[i][j] == 1){
                 idxAda[i] = j;
                 i++;
             } else {
-                solParam[j] = Character.toString(isi);
+                SP.SolPar[j] = Character.toString(isi);
                 isi = (char)((int)isi + 1);
             }
             j++;
@@ -198,10 +201,14 @@ class Gauss{
 
         //Assign Solution
         for (int k = 1; k <= M1.NBrsEff; k++ ){
-            for (int l = M1.NKolEff - 1; l < idxAda[k]; l--){
-                sumParam += " -" + Double.toString(M1.Mem[k][l]);
+            //System.out.print("Aku");
+            String sumParam = "";
+            for (int l = M1.NKolEff - 1; l > idxAda[k]; l--){
+                if( Math.abs(M1.Mem[k][l]) > e){
+                    sumParam += " -" + Double.toString(M1.Mem[k][l]) + SP.SolPar[l];
+                }
             }
-            solParam[idxAda[k]] = Double.toString(M1.Mem[k][M1.NKolEff]) + sumParam;
+            SP.SolPar[idxAda[k]] = Double.toString(M1.Mem[k][M1.NKolEff]) + sumParam;
         }
     }
 
