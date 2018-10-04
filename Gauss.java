@@ -188,10 +188,8 @@ class Gauss{
         int i = 1;
         int j = 1;
         Double e = 0.0001;
-        
-        //Ubah Ke Gauss-Jordan
-        //M1.CreateReducedEchelon();
-        //Assign Freevar
+
+
         while (j < M1.NKolEff){
             if (M1.Mem[i][j] == 1){
                 idxAda[i] = j;
@@ -203,9 +201,7 @@ class Gauss{
             j++;
         }
 
-        //Assign Solution
         for (int k = 1; k <= M1.NBrsEff; k++ ){
-            //System.out.print("Aku");
             String sumParam = "";
             for (int l = M1.NKolEff - 1; l > idxAda[k]; l--){
                 if( Math.abs(M1.Mem[k][l]) > e){
@@ -219,8 +215,11 @@ class Gauss{
     public void solusi (Matriks M1, Solution S1){
         if(M1.NKolEff != M1.NBrsEff + 1){
             paramSol(M1,S1);
+        } else if (isInfiniteSolution()){
+          paramSol(M1,S1);
+
         } else {
-            backSubtitution(M1, S1);
+          backSubtitution(M1, S1);
         }
     }
 
