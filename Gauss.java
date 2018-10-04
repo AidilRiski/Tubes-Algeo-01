@@ -156,42 +156,35 @@ class Gauss{
         }
     }
 
-    public void backSubtitution (Matriks M1, Solution S1){
-        //int N = this.matriks.NBrsEff;
-        //double[] solution = new double[M1.NBrsEff];
-
-        //MakeArray(M1.NBrsEff);
-        //System.out.println (S1.Sol[0]);
-        System.out.println (M1.Mem[M1.NBrsEff][M1.NKolEff]);
-        for (int i = M1.NBrsEff; i > 0; i--)
+    public void backSubtitution (Solution S1){
+        System.out.println (this.matriks.Mem[this.matriks.NBrsEff][this.matriks.NKolEff]);
+        for (int i = this.matriks.NBrsEff; i > 0; i--)
         {
             double sum = 0.0;
-            for (int j = i+1; j <= M1.NBrsEff; j++) {
+            for (int j = i+1; j <= this.matriks.NBrsEff; j++) {
               System.out.print ("Iterasi ke-");
               System.out.println(j);
-              System.out.println (M1.Mem[i][j]);
-              sum = sum + (M1.Mem[i][j]* Double.parseDouble(S1.Sol[j]));
+              System.out.println (this.matriks.Mem[i][j]);
+              sum = sum + (this.matriks.Mem[i][j]* Double.parseDouble(S1.Sol[j]));
             }
-            double temp = (M1.Mem[i][M1.NKolEff] - sum) / M1.Mem[i][i];
+            double temp = (this.matriks.Mem[i][this.matriks.NKolEff] - sum) / this.matriks.Mem[i][i];
             DecimalFormat df = new DecimalFormat("#.######");
             S1.Sol[i] = df.format(temp);
         }
     }
 
-    public void paramSol (Matriks M1, Solution S1){
-        int varBebas = M1.NKolEff - (M1.NBrsEff + 1);
+    public void paramSol (Solution S1){
+        int varBebas = this.matriks.NKolEff - (this.matriks.NBrsEff + 1);
         char[] varIsi = new char[varBebas];
-        int[] idxAda = new int[M1.NBrsEff+1];
-        //String[] solParam = new String[M1.NKolEff];
+        int[] idxAda = new int[this.matriks.NBrsEff+1];
         char isi = 'a';
-        // /String sumParam;
         int i = 1;
         int j = 1;
         Double e = 0.0001;
 
 
-        while (j < M1.NKolEff){
-            if (M1.Mem[i][j] == 1){
+        while (j < this.matriks.NKolEff){
+            if (this.matriks.Mem[i][j] == 1){
                 idxAda[i] = j;
                 i++;
             } else {
@@ -201,30 +194,30 @@ class Gauss{
             j++;
         }
 
-        for (int k = 1; k <= M1.NBrsEff; k++ ){
+        for (int k = 1; k <= this.matriks.NBrsEff; k++ ){
             String sumParam = "";
-            for (int l = M1.NKolEff - 1; l > idxAda[k]; l--){
-                if( Math.abs(M1.Mem[k][l]) > e){
-                  if (M1.Mem[k][l] < 0) {
-                    sumParam += " + " + Double.toString(Math.abs(M1.Mem[k][l])) + S1.Sol[l];
+            for (int l = this.matriks.NKolEff - 1; l > idxAda[k]; l--){
+                if( Math.abs(this.matriks.Mem[k][l]) > e){
+                  if (this.matriks.Mem[k][l] < 0) {
+                    sumParam += " + " + Double.toString(Math.abs(this.matriks.Mem[k][l])) + S1.Sol[l];
                   } else {
-                    sumParam += " - " + Double.toString(M1.Mem[k][l]) + S1.Sol[l];
+                    sumParam += " - " + Double.toString(this.matriks.Mem[k][l]) + S1.Sol[l];
                   }
 
                 }
             }
-            S1.Sol[idxAda[k]] = Double.toString(M1.Mem[k][M1.NKolEff]) + sumParam;
+            S1.Sol[idxAda[k]] = Double.toString(this.matriks.Mem[k][this.matriks.NKolEff]) + sumParam;
         }
     }
 
-    public void solusi (Matriks M1, Solution S1){
-        if(M1.NKolEff != M1.NBrsEff + 1){
-            paramSol(M1,S1);
-        } else if (isInfiniteSolution()){
-          paramSol(M1,S1);
+    public void solusi (Solution S1){
+        if(this.matriks.NKolEff != this.matriks.NBrsEff + 1){
+            paramSol(S1);
+        } else if (this.isInfiniteSolution()){
+          paramSol(S1);
 
         } else {
-          backSubtitution(M1, S1);
+          backSubtitution(S1);
         }
     }
 

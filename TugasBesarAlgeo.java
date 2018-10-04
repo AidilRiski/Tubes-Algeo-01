@@ -108,7 +108,7 @@ class TugasBesarAlgeo{
                 G1.matriks.TulisMatriks();
                 Solution S1 = new Solution(G1.matriks.NKolEff - 1);
                 //SolParam SP = new SolParam(G1.matriks.NBrsEff);
-                G1.solusi(G1.matriks, S1);
+                G1.solusi(S1);
                 //G1.backSubtitution(G1.matriks,S1);
                 S1.printSolution();
                 //S1.PrintSolToFile();
