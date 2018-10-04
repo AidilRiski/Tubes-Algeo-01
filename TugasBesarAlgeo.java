@@ -129,6 +129,9 @@ class TugasBesarAlgeo{
                 G1.CreateEchelon();
                 System.out.println ("Matriks eselon: ");
                 G1.matriks.TulisMatriks();
+                Solution S1 = new Solution(G1.matriks.NKolEff - 1);
+                G1.solusi(S1);
+                S1.printSolution();
 
             } else if (menumunculketiga == 3) {
               break;
@@ -156,6 +159,9 @@ class TugasBesarAlgeo{
               G1.CreateReducedEchelon();
               System.out.println ("Matriks eselon tereduksi : ");
               G1.matriks.TulisMatriks();
+              Solution S1 = new Solution(G1.matriks.NKolEff - 1);
+              G1.solusi(S1);
+              S1.printSolution();
 
             } else if (menumunculketiga == 2) {
               System.out.println ("Masukkan nama FileEksternal dengan format .txt (tulis .txt juga)");
@@ -172,6 +178,9 @@ class TugasBesarAlgeo{
               G1.CreateReducedEchelon();
               System.out.println ("Matriks eselon tereduksi: ");
               G1.matriks.TulisMatriks();
+              Solution S1 = new Solution(G1.matriks.NKolEff - 1);
+              G1.solusi(S1);
+              S1.printSolution();
 
           } else if (menumunculketiga == 3) {
             break;
