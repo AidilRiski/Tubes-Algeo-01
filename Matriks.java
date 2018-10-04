@@ -58,7 +58,7 @@ class Matriks{
         for (int i = this.IdxBrsMin; i <= this.NBrsEff; i++){
             for (int j = this.IdxKolMin; j <= this.NKolEff; j++){
                 DecimalFormat df = new DecimalFormat("#.#####");
-                df.setRoundingMode(RoundingMode.CEILING);
+                //df.setRoundingMode(RoundingMode.CEILING);
 
                 //M.Mem[i][j] = Double.parseDouble(df.format(bulat));
 

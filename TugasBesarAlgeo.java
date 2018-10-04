@@ -44,6 +44,7 @@ class TugasBesarAlgeo{
       String namafile = new String();
       int menumunculpertama, menumunculkedua, menumunculketiga;
       int Brs, Kol;
+      double msk;
       FileEksternal f = new FileEksternal();
       Matriks M1 = new Matriks (1,1);
       /*System.out.println ("Masukkan nama FileEksternal dengan format .txt (tulis .txt juga)");
@@ -230,6 +231,18 @@ class TugasBesarAlgeo{
             G1.CreateEchelon();
             System.out.println ("Matriks eselon: ");
             G1.matriks.TulisMatriks();
+            Solution solusi = new Solution(G1.matriks.NBrsEff);
+            G1.solusi(solusi);
+            solusi.printSolutionInterpolasi();
+            System.out.println ("Masukkan angka yang ingin Anda taksir!");
+            msk = 999;
+            while (msk != 0) {
+              msk = sc.nextDouble();
+              System.out.println ("Hasil adalah");
+              System.out.println (solusi.TaksiranInterpolasi(msk));
+            }
+
+
 
         } else if (menumunculketiga == 3) {
           break;

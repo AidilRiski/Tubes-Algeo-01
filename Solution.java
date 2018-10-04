@@ -49,14 +49,23 @@ public class Solution{
     void printSolutionInterpolasi () throws Exception {
       try {
         System.out.print("f(x) = ");
+        String s;
+
         for (int i = 1 ; i <= this.BrsEff ; i++) {
-          String s = this.Sol[i] + "x^" + Integer.toString(i - 1);
-          if (Integer.parseInt(this.Sol[i]) != 0){
+          if (i == 1) {
+            s = this.Sol[i];
+          } else {
+            s = this.Sol[i] + "x^" + Integer.toString(i - 1);
+          }
+          if (Double.parseDouble(this.Sol[i]) != 0){
             System.out.print(s);
           }
           if (i < this.BrsEff){
-            if (Integer.parseInt(this.Sol[i + 1]) != 0){
-              System.out.print(" + ");
+            if (Double.parseDouble(this.Sol[i + 1]) != 0){
+              if (Double.parseDouble(this.Sol[i + 1]) > 0)
+                System.out.print(" + ");
+              else
+                System.out.print("  ");
             }
           }
         }
@@ -64,5 +73,13 @@ public class Solution{
       } catch(Exception e) {
         System.out.println(e);
       }
+    }
+
+    double TaksiranInterpolasi (double msk) {
+      double Taksir = 0;
+      for (int i = 1 ; i <= this.BrsEff ; i++) {
+        Taksir =  Taksir + Double.parseDouble(this.Sol[i])* Math.pow (msk,i-1);
+      }
+      return Taksir;
     }
 }

@@ -12,28 +12,13 @@ class Gauss{
     }
 
     void CreateEchelon(){
-        /*
-        for (int i = this.matriks.IdxBrsMin; i < this.matriks.NBrsEff; i++){
-            for (int j = i + 1; j <= this.matriks.NBrsEff; j++){
-                if (j <= this.matriks.NKolEff){
-                    if (this.matriks.Mem[j][i] != 0){
-                        Double multiplier = this.matriks.Mem[j][i];
-                        Double divider = this.matriks.Mem[i][i];
-                        for (int k = i;  k <= this.matriks.NKolEff; k++){
-                            //System.out.println(i + " " + j + " " + k);
-                            this.matriks.Mem[j][k] -= multiplier * this.matriks.Mem[i][k] / divider;
-                        }
-                    }
-                }
-            }
-        }*/
 
         int brsPivot = this.matriks.IdxBrsMin;
         int kolPivot = this.matriks.IdxKolMin;
 
         int maxBrsPivot = brsPivot;
         int maxKolPivot = kolPivot;
-        
+
         while (maxBrsPivot < this.matriks.NBrsEff && maxKolPivot < this.matriks.NKolEff){
             maxBrsPivot++;
             maxKolPivot++;
@@ -57,6 +42,7 @@ class Gauss{
                         this.matriks.Mem[i][n] -= multiplier * this.matriks.Mem[brsPivot][n] / divider;
                     }
                     this.matriks.TulisMatriks();
+                    System.out.println();
                 }
                 if (i < this.matriks.NBrsEff){
                     i++;
@@ -230,7 +216,7 @@ class Gauss{
     }
 
     public void paramSol (Solution S1){
-        int varBebas = this.matriks.NKolEff - (this.matriks.NBrsEff + 1);
+        int varBebas = (this.matriks.NKolEff) - (this.matriks.NBrsEff + 1);
         char[] varIsi = new char[varBebas];
         int[] idxAda = new int[this.matriks.NBrsEff+1];
         char isi = 'a';
