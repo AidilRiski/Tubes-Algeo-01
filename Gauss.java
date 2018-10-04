@@ -12,19 +12,74 @@ class Gauss{
     }
 
     void CreateEchelon(){
+        /*
         for (int i = this.matriks.IdxBrsMin; i < this.matriks.NBrsEff; i++){
             for (int j = i + 1; j <= this.matriks.NBrsEff; j++){
-                if (this.matriks.Mem[j][i] != 0){
-                    Double multiplier = this.matriks.Mem[j][i];
-                    Double divider = this.matriks.Mem[i][i];
-                    for (int k = i;  k <= this.matriks.NKolEff; k++){
-                        this.matriks.Mem[j][k] -= multiplier * this.matriks.Mem[i][k] / divider;
+                if (j <= this.matriks.NKolEff){
+                    if (this.matriks.Mem[j][i] != 0){
+                        Double multiplier = this.matriks.Mem[j][i];
+                        Double divider = this.matriks.Mem[i][i];
+                        for (int k = i;  k <= this.matriks.NKolEff; k++){
+                            //System.out.println(i + " " + j + " " + k);
+                            this.matriks.Mem[j][k] -= multiplier * this.matriks.Mem[i][k] / divider;
+                        }
                     }
                 }
             }
+        }*/
+
+        int brsPivot = this.matriks.IdxBrsMin;
+        int kolPivot = this.matriks.IdxKolMin;
+
+        int maxBrsPivot = brsPivot;
+        int maxKolPivot = kolPivot;
+        
+        while (maxBrsPivot < this.matriks.NBrsEff && maxKolPivot < this.matriks.NKolEff){
+            maxBrsPivot++;
+            maxKolPivot++;
         }
-        for (int i = this.matriks.IdxBrsMin; i <= this.matriks.NBrsEff; i++){
-            this.matriks.IdentifyBrs(i);
+
+        int i = brsPivot + 1;
+        int j = kolPivot;
+
+        while (i <= this.matriks.NBrsEff){
+            int ubahPivot = brsPivot + 1;
+            while (ubahPivot <= this.matriks.NBrsEff && this.matriks.Mem[brsPivot][kolPivot] == 0){
+                this.matriks.TukarBrs(brsPivot, ubahPivot);
+                ubahPivot++;
+            }
+            if (this.matriks.Mem[brsPivot][kolPivot] != 0){
+                if (this.matriks.Mem[i][j] != 0){
+                    //System.out.println(brsPivot + " " + kolPivot + " " + i + " " + j);
+                    Double divider = this.matriks.Mem[brsPivot][kolPivot];
+                    Double multiplier = this.matriks.Mem[i][j];
+                    for (int n = this.matriks.IdxKolMin; n <= this.matriks.NKolEff; n++){
+                        this.matriks.Mem[i][n] -= multiplier * this.matriks.Mem[brsPivot][n] / divider;
+                    }
+                    this.matriks.TulisMatriks();
+                }
+                if (i < this.matriks.NBrsEff){
+                    i++;
+                }else {
+                    if (j < maxKolPivot){
+                        brsPivot++;
+                        kolPivot++;
+                        i = brsPivot + 1;
+                        j++;
+                    }else {
+                        i++;
+                    }
+                }
+            }else {
+                brsPivot++;
+                kolPivot++;
+                i = brsPivot + 1;
+                j++;
+            }
+        }
+
+        for (int a = this.matriks.IdxBrsMin; a <= this.matriks.NBrsEff; a++){
+            this.matriks.IdentifyBrs(a);
         }
     }
     void CreateReducedEchelon(){
@@ -162,15 +217,16 @@ class Gauss{
         {
             double sum = 0.0;
             for (int j = i+1; j <= this.matriks.NBrsEff; j++) {
-              System.out.print ("Iterasi ke-");
-              System.out.println(j);
-              System.out.println (this.matriks.Mem[i][j]);
+              //System.out.print ("Iterasi ke-");
+              //System.out.println(j);
+              //System.out.println (this.matriks.Mem[i][j]);
               sum = sum + (this.matriks.Mem[i][j]* Double.parseDouble(S1.Sol[j]));
             }
             double temp = (this.matriks.Mem[i][this.matriks.NKolEff] - sum) / this.matriks.Mem[i][i];
             DecimalFormat df = new DecimalFormat("#.######");
             S1.Sol[i] = df.format(temp);
         }
+        this.CreateReducedEchelon();
     }
 
     public void paramSol (Solution S1){

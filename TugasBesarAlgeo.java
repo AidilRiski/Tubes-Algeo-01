@@ -211,6 +211,9 @@ class TugasBesarAlgeo{
             G1.CreateEchelon();
             System.out.println ("Matriks eselon: ");
             G1.matriks.TulisMatriks();
+            Solution solusi = new Solution(G1.matriks.NBrsEff);
+            G1.solusi(solusi);
+            solusi.printSolutionInterpolasi();
 
           } else if (menumunculketiga == 2) {
             System.out.println ("Masukkan nama FileEksternal dengan format .txt (tulis .txt juga)");

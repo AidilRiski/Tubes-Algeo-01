@@ -25,17 +25,8 @@ public class Solution{
 
 
     /** print solusi **/
-    /*public void printSolution()
-    {
-        //int N = sol.length;
-        System.out.println("Solusi : ");
-        for (int i = 1; i <= this.BrsEff ; i++) {
-          System.out.print("X" + i + " = " + this.Sol[i] + "\n");
-        //  System.out.println();
-        }
-    }*/
 
-    public void printSolution () throws Exception {
+    void printSolution () throws Exception {
       try {
         FileOutputStream fout = new FileOutputStream("SolusiSPL.txt");
         System.out.print("Solusi: \n");
@@ -53,5 +44,25 @@ public class Solution{
         System.out.println(e);
       }
 
+    }
+
+    void printSolutionInterpolasi () throws Exception {
+      try {
+        System.out.print("f(x) = ");
+        for (int i = 1 ; i <= this.BrsEff ; i++) {
+          String s = this.Sol[i] + "x^" + Integer.toString(i - 1);
+          if (Integer.parseInt(this.Sol[i]) != 0){
+            System.out.print(s);
+          }
+          if (i < this.BrsEff){
+            if (Integer.parseInt(this.Sol[i + 1]) != 0){
+              System.out.print(" + ");
+            }
+          }
+        }
+        System.out.println();
+      } catch(Exception e) {
+        System.out.println(e);
+      }
     }
 }
