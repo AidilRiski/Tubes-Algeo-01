@@ -106,8 +106,13 @@ class Gauss{
                 boolean found = false;
                 int c = 1;
                 while (!found && c <= this.matriks.NBrsEff - i){
-                    if (this.matriks.Mem[i + c][i + j] != 0){
-                        found = true;
+                    System.out.println("AS " + i + " " + (i + j) + " " + k + " " + c + " " + found);
+                    if (i <= this.matriks.NBrsEff && i + j <= this.matriks.NKolEff){
+                        if (this.matriks.Mem[i + c][i + j] != 0){
+                            found = true;
+                        }else {
+                            c++;
+                        }
                     }else {
                         c++;
                     }
@@ -120,7 +125,6 @@ class Gauss{
                         jj++;
                     }
                 }
-                //System.out.println(i + " " + (i + j) + " " + k + " " + c + " " + found);
                 if (found && this.matriks.Mem[i][i + j] != 0){
                     Double multiplier = this.matriks.Mem[i][i + j];
                     Double divider = this.matriks.Mem[i + c][i + j];
