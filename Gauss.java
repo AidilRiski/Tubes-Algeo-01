@@ -92,7 +92,7 @@ class Gauss{
                 boolean found = false;
                 int c = 1;
                 while (!found && c <= this.matriks.NBrsEff - i){
-                    System.out.println("AS " + i + " " + (i + j) + " " + k + " " + c + " " + found);
+                    //System.out.println("AS " + i + " " + (i + j) + " " + k + " " + c + " " + found);
                     if (i <= this.matriks.NBrsEff && i + j <= this.matriks.NKolEff){
                         if (this.matriks.Mem[i + c][i + j] != 0){
                             found = true;
@@ -203,10 +203,10 @@ class Gauss{
 
     public void backSubtitution (Solution S1){
         System.out.println (this.matriks.Mem[this.matriks.NBrsEff][this.matriks.NKolEff]);
-        for (int i = this.matriks.NBrsEff; i > 0; i--)
+        for (int i = this.matriks.NKolEff-1; i > 0; i--)
         {
             double sum = 0.0;
-            for (int j = i+1; j <= this.matriks.NBrsEff; j++) {
+            for (int j = i+1; j <= this.matriks.NKolEff -1; j++) {
               //System.out.print ("Iterasi ke-");
               //System.out.println(j);
               //System.out.println (this.matriks.Mem[i][j]);
@@ -258,13 +258,14 @@ class Gauss{
     }
 
     public void solusi (Solution S1){
-        if(this.matriks.NKolEff != this.matriks.NBrsEff + 1){
+        if(this.matriks.NKolEff > this.matriks.NBrsEff + 1){
             paramSol(S1);
         } else if (this.isInfiniteSolution()){
           paramSol(S1);
-
-        } else {
+        } else if (this.isSolvable()){
           backSubtitution(S1);
+        } else {
+            System.out.print("Tidak Memiliki Solusi");
         }
     }
 
