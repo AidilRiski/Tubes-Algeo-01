@@ -205,7 +205,12 @@ class Gauss{
             String sumParam = "";
             for (int l = M1.NKolEff - 1; l > idxAda[k]; l--){
                 if( Math.abs(M1.Mem[k][l]) > e){
-                    sumParam += " -" + Double.toString(M1.Mem[k][l]) + S1.Sol[l];
+                  if (M1.Mem[k][l] < 0) {
+                    sumParam += " + " + Double.toString(Math.abs(M1.Mem[k][l])) + S1.Sol[l];
+                  } else {
+                    sumParam += " - " + Double.toString(M1.Mem[k][l]) + S1.Sol[l];
+                  }
+
                 }
             }
             S1.Sol[idxAda[k]] = Double.toString(M1.Mem[k][M1.NKolEff]) + sumParam;
