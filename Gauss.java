@@ -182,6 +182,7 @@ class Gauss{
         int j = 1;
         Double e = 0.0001;
 
+        this.CreateReducedEchelon();
 
         while (j < this.matriks.NKolEff){
             if (this.matriks.Mem[i][j] == 1){
