@@ -8,8 +8,14 @@ import java.math.RoundingMode;
 import java.lang.*;
 
 class FileEksternal{
- public File file;
+  public File file;
+  public int pembagian;
+  public int pembagian2;
 
+  FileEksternal(){
+    this.pembagian = 0;
+    this.pembagian2 = 0;
+  }
 
   void AssignNamaFile (String X) throws FileNotFoundException, IOException  {
     this.file = new File (X);
@@ -27,7 +33,7 @@ class FileEksternal{
         scan.next();
       }
     } catch (FileNotFoundException e1){
-        e1.printStackTrace();
+        //e1.printStackTrace();
     }
     return count;
   }
@@ -42,7 +48,7 @@ class FileEksternal{
         //System.out.println(countBrs);
       }
     } catch (FileNotFoundException e1){
-        e1.printStackTrace();
+        //e1.printStackTrace();
     }
     return countBrs;
   }
@@ -67,7 +73,7 @@ class FileEksternal{
         }
       }
     } catch (FileNotFoundException e1){
-        e1.printStackTrace();
+        //e1.printStackTrace();
     }
   }
 
@@ -77,14 +83,28 @@ class FileEksternal{
     int i,j;
     double temp;
     double bulat;
+    this.pembagian = 0;
     try {
       scan = new Scanner (this.file);
       while (scan.hasNextDouble()){
         for (i = M.IdxBrsMin ; i<= M.NBrsEff ; i++) {
           temp = scan.nextDouble();
+          if (this.pembagian == 0){
+            while (temp >= 1000){
+              temp = temp / 1000;
+              this.pembagian++;
+            }
+          }else {
+            int k = 0;
+            while (k < this.pembagian){
+              temp = temp / 1000;
+              k++;
+            }
+          }
           for (j = M.IdxKolMin ; j <= M.NKolEff ; j++) {
             if (j != M.NKolEff) {
               bulat = (Math.pow(temp,j-1));
+              bulat = round(bulat, 6);
               M.Mem[i][j] = bulat;
             }
             else
@@ -93,8 +113,11 @@ class FileEksternal{
         }
       }
     } catch (FileNotFoundException e1){
-        e1.printStackTrace();
+        System.out.println("  ERROR: FILE TIDAK DITEMUKAN!");
     }
   }
-
+  double round(double value, int places) {
+      double scale = Math.pow(10, places);
+      return Math.round(value * scale) / scale;
+  }
 }

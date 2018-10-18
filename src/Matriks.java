@@ -56,13 +56,15 @@ class Matriks{
 
     void TulisMatriks(){
         for (int i = this.IdxBrsMin; i <= this.NBrsEff; i++){
+            System.out.print("  ");
             for (int j = this.IdxKolMin; j <= this.NKolEff; j++){
                 DecimalFormat df = new DecimalFormat("#.#####");
-                //df.setRoundingMode(RoundingMode.CEILING);
+                df.setRoundingMode(RoundingMode.CEILING);
 
                 //M.Mem[i][j] = Double.parseDouble(df.format(bulat));
 
                 System.out.print(df.format(this.Mem[i][j]));
+                //System.out.print(this.Mem[i][j]);
                 if (j < this.NKolEff){
                     System.out.print(" ");
                 }else if (j == this.NKolEff){
@@ -100,13 +102,22 @@ class Matriks{
             this.Mem[idxBrs2][j] = temp;
         }
     }
+    void NormaliseBrs(int idxBrs){
+        Double accuracy = 0.0000001;
+        int j = this.IdxKolMin;
+        while (j <= this.NKolEff){
+            if (Math.abs(this.Mem[idxBrs][j]) < accuracy){
+                this.Mem[idxBrs][j] = 0.0;
+            }
+            j++;
+        }
+    }
     void IdentifyBrs(int idxBrs){
-
         boolean found = false;
         Double divider = 0.0;
         int j = this.IdxKolMin;
         while (j <= this.NKolEff){
-            if (!found && this.Mem[idxBrs][j] != 0){
+            if (!found && this.Mem[idxBrs][j] != 0.0){
                 divider = this.Mem[idxBrs][j];
                 found = true;
                 j--;
@@ -115,6 +126,5 @@ class Matriks{
             }
             j++;
         }
-
     }
 }
